@@ -40,8 +40,8 @@ public class ClientHandler implements Runnable {
                 out.println("Entrez votre login (ou 'quit' pour quitter) :"); // Demande le login
                 String login = in.readLine(); // Lit le login envoyé par le client
                 if (login == null || "quit".equalsIgnoreCase(login)) { // Si connexion fermée ou "quit"
-                    out.println("Connexion abandonnée."); // Envoie un message au client
-                    server.log("Client " + clientAddress + " a abandonné l’authentification."); // Log l’abandon
+                    out.println("Connexion abandonnee."); // Envoie un message au client
+                    server.log("Client " + clientAddress + " a abandonne l’authentification."); // Log l’abandon
                     return; // Quitte la méthode
                 }
 
@@ -51,11 +51,11 @@ public class ClientHandler implements Runnable {
                 if (server.authenticate(login, password)) { // Vérifie les identifiants
                     authenticated = true; // Marque comme authentifié
                     server.addClient(clientAddress); // Ajoute le client à la liste
-                    server.log("Client authentifié et connecté : " + clientAddress); // Log la connexion
-                    out.println("Authentification réussie. Vous êtes connecté."); // Confirme au client
+                    server.log("Client authentifie et connecte : " + clientAddress); // Log la connexion
+                    out.println("Authentification reussie. Vous etes connecte."); // Confirme au client
                 } else {
-                    server.log("Échec de l’authentification pour " + clientAddress); // Log l’échec
-                    out.println("Authentification échouée. Veuillez réessayer."); // Demande de réessayer
+                    server.log("Echec de l’authentification pour " + clientAddress); // Log l’échec
+                    out.println("Authentification echouee. Veuillez reessayer."); // Demande de réessayer
                 }
             }
 
@@ -104,7 +104,7 @@ public class ClientHandler implements Runnable {
             }
             process.waitFor(); // Attend la fin de l’exécution de la commande
         } catch (IOException | InterruptedException e) {
-            output.append("Erreur lors de l'exécution : ").append(e.getMessage()); // Ajoute l’erreur au résultat
+            output.append("Erreur lors de l'execution : ").append(e.getMessage()); // Ajoute l’erreur au résultat
         }
         return output.toString().trim(); // Retourne le résultat sans espaces inutiles
     }
@@ -123,7 +123,7 @@ public class ClientHandler implements Runnable {
         long fileSize = Long.parseLong(in.readLine()); // Lit la taille et convertit en long
 
         // Log le début de la réception
-        server.log("Réception du fichier " + fileName + " (" + fileSize + " octets) depuis " + clientAddress);
+        server.log("Reception du fichier " + fileName + " (" + fileSize + " octets) depuis " + clientAddress);
 
         // Ouvre les flux pour recevoir et sauvegarder le fichier
         try (BufferedInputStream fileInput = new BufferedInputStream(clientSocket.getInputStream());
@@ -135,9 +135,9 @@ public class ClientHandler implements Runnable {
                 fileOutput.write(buffer, 0, count); // Écrit les octets dans le fichier
                 bytesRead += count; // Met à jour le compteur
             }
-            server.log("Fichier " + fileName + " reçu avec succès."); // Log la réussite
+            server.log("Fichier " + fileName + " recu avec succes."); // Log la réussite
         }
 
-        out.println("Fichier reçu et sauvegardé."); // Confirme au client
+        out.println("Fichier reçu et sauvegarde."); // Confirme au client
     }
 }
